@@ -1,4 +1,4 @@
-function HelixPay() {
+function helixpay() {
   this.bearerToken = null;
 
   this.initializeApp = (token) => {
@@ -6,4 +6,4 @@ function HelixPay() {
   }
 }
 
-export default new HelixPay();
+export default new helixpay();
