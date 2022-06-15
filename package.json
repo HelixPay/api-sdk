@@ -1,6 +1,6 @@
 {
   "name": "helixpay-js-sdk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Javascript SDK for HelixPay API",
   "main": "lib/index.js",
   "files": [
