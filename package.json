@@ -1,0 +1,20 @@
+{
+  "name": "helixpay-js-sdk",
+  "version": "1.0.0",
+  "description": "Javascript SDK for HelixPay API",
+  "main": "index.js",
+  "module": "dist/helixpay.runtime.esm.js",
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "helixpay",
+    "javascript"
+  ],
+  "author": "HelixPay",
+  "license": "ISC"
+}
