@@ -1,9 +1,11 @@
 class HelixPay {
-  bearerToken: string | null | undefined;
+  bearerToken: string | null = null;
 
-  initializeApp(token: string): void {
+  initializeApp(token: string): void  {
     this.bearerToken = token;
   }
 }
 
-export default new HelixPay();
+const helixpay = new HelixPay();
+
+export default helixpay;
