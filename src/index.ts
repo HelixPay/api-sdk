@@ -1,4 +1,5 @@
 class HelixPay {
+  apiBaseUrl:string = 'https://api-sandbox.helixpay.ph/v2';
   bearerToken: string | null = null;
 
   initializeApp(token: string): void  {
