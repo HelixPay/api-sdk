@@ -3,4 +3,6 @@ coverage/
 node_modules/
 .idea/
 .vscode/
-lib/
+dist/
+.DS_Store
+.DS_Store?
