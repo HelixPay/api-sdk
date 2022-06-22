@@ -6,10 +6,10 @@
   "module": "dist/mjs/index.js",
   "types": "dist/mjs/index.d.ts",
   "exports": {
-      ".": {
-          "import": "./dist/mjs/index.js",
-          "require": "./dist/cjs/index.js"
-      }
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
   },
   "files": [
     "dist/"
@@ -33,5 +33,8 @@
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
   }
 }
