@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 type CheckoutData = {
   customer: {
@@ -43,20 +43,40 @@ type CheckoutData = {
   shipping_zip_code: String;
 };
 class HelixPay {
-  apiBaseUrl: string = "https://api-sandbox.helixpay.ph";
+  #isInitialized: boolean = false;
+  apiBaseUrl: string = 'https://api-sandbox.helixpay.ph/v2';
   bearerToken: string | null = null;
   checkoutURL: string | null = null;
 
-  initializeApp(token: string): void {
-    this.bearerToken = token;
+  /**
+   * Initialize SDK
+   *
+   * Used to initialize and setup the SDK. All other SDK methods must be called after this one.
+   */
+  init(bearerToken: string): void {
+    if (!bearerToken) {
+      throw new Error('bearerToken parameter is required');
+    }
+    this.#isInitialized = true;
+    this.bearerToken = bearerToken;
+  }
+
+  #checkInitialization() {
+    if (!this.#isInitialized) {
+      throw new Error('SDK is not initilialized');
+    }
+  }
+
+  getOrders() {
+    this.#checkInitialization();
   }
 
   requestCheckoutURL(data: CheckoutData): Promise<any> {
     return axios.post(`${this.apiBaseUrl}/v2/checkouts`, data, {
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
         Authorization: `Bearer ${this.bearerToken}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
   }
