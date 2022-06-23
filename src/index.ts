@@ -1,9 +1,64 @@
-class HelixPay {
-  apiBaseUrl:string = 'https://api-sandbox.helixpay.ph/v2';
-  bearerToken: string | null = null;
+import axios from "axios";
 
-  initializeApp(token: string): void  {
+type CheckoutData = {
+  customer: {
+    name: String;
+    mobile_number: String;
+    address: String;
+    barangay: String;
+    city: String;
+    province: String;
+    zip_code: String;
+    email: String;
+  };
+  products: [
+    {
+      payment_schedule: {
+        frequency: String;
+        day: Number;
+      };
+      price: Number;
+      quantity: Number;
+      are_multiple_orders_allowed: Boolean;
+      is_shippable: Boolean;
+      product_id: Number;
+      title: String;
+      description: String;
+    }
+  ];
+  payment_type_id: Number;
+  payor: String;
+  billing_address: String;
+  billing_barangay: String;
+  billing_city: String;
+  billing_province: String;
+  billing_country: String;
+  billing_zip_code: String;
+  recipient: String;
+  shipping_address: String;
+  shipping_barangay: String;
+  shipping_city: String;
+  shipping_province: String;
+  shipping_country: String;
+  shipping_zip_code: String;
+};
+class HelixPay {
+  apiBaseUrl: string = "https://api-sandbox.helixpay.ph";
+  bearerToken: string | null = null;
+  checkoutURL: string | null = null;
+
+  initializeApp(token: string): void {
     this.bearerToken = token;
+  }
+
+  requestCheckoutURL(data: CheckoutData): Promise<any> {
+    return axios.post(`${this.apiBaseUrl}/v2/checkouts`, data, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.bearerToken}`,
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
 
