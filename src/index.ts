@@ -1,3 +1,10 @@
+import axios from 'axios';
+import { type } from 'os';
+
+type productId = 1;
+type included =
+  'images,items,options.values,variants.optionValues.option,groups,exclusiveGroups';
+
 class HelixPay {
   #isInitialized: boolean = false;
   apiBaseUrl: string = 'https://api-sandbox.helixpay.ph/v2';
@@ -24,6 +31,20 @@ class HelixPay {
 
   getOrders() {
     this.#checkInitialization();
+  }
+
+  getProductById(productId: productId, included?: included): Promise<any> {
+    this.#checkInitialization();
+
+    return axios.get(`${this.apiBaseUrl}/v1/products/${productId}`, {
+      params: {
+        include: included,
+      },
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.bearerToken}`,
+      },
+    });
   }
 }
 
