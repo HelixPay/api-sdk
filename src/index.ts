@@ -72,6 +72,8 @@ class HelixPay {
   }
 
   requestCheckoutURL(data: CheckoutData): Promise<any> {
+    this.#checkInitialization();
+
     return axios.post(`${this.apiBaseUrl}/v2/checkouts`, data, {
       headers: {
         Accept: 'application/json',
