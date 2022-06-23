@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 class HelixPay {
   #isInitialized: boolean = false;
   apiBaseUrl: string = 'https://api-sandbox.helixpay.ph/v2';
@@ -16,14 +18,28 @@ class HelixPay {
     this.bearerToken = bearerToken;
   }
 
-  #checkInitialization() {
+  checkInitialization() {
     if (!this.#isInitialized) {
       throw new Error('SDK is not initilialized');
     }
   }
 
   getOrders() {
-    this.#checkInitialization();
+    this.checkInitialization();
+  }
+
+  getProductById(productId: number, included: string): Promise<any> {
+    this.checkInitialization();
+
+    return axios.get(`${this.apiBaseUrl}/v1/products/${productId}`, {
+      params: {
+        include: included,
+      },
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.bearerToken}`,
+      },
+    });
   }
 }
 
