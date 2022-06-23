@@ -1,4 +1,9 @@
 import axios from 'axios';
+import { type } from 'os';
+
+type productId = 1;
+type included =
+  'images,items,options.values,variants.optionValues.option,groups,exclusiveGroups';
 
 class HelixPay {
   #isInitialized: boolean = false;
@@ -18,18 +23,18 @@ class HelixPay {
     this.bearerToken = bearerToken;
   }
 
-  checkInitialization() {
+  #checkInitialization() {
     if (!this.#isInitialized) {
       throw new Error('SDK is not initilialized');
     }
   }
 
   getOrders() {
-    this.checkInitialization();
+    this.#checkInitialization();
   }
 
-  getProductById(productId: number, included: string): Promise<any> {
-    this.checkInitialization();
+  getProductById(productId: productId, included?: included): Promise<any> {
+    this.#checkInitialization();
 
     return axios.get(`${this.apiBaseUrl}/v1/products/${productId}`, {
       params: {
